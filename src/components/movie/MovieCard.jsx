@@ -1,15 +1,28 @@
+import { useContext, useState } from "react"
 import "./MovieCard.css"
 
 import {
     TERipple
 } from "tw-elements-react";
 
+import MovieModal from "./MovieModal";
+import { MovieContext } from "../../contexts/MovieContext";
 
 export default function MovieCard({ movie }) {
+    const { updateMovie } = useContext(MovieContext)
+    const [showModal, setShowModal] = useState();
+
+    function setModal(x) {
+        setShowModal(x)
+    }
+
+    function onModalOpen() {
+        updateMovie(movie)
+    }
 
     return (
         <>
-            <div className="block w-36 h-62 rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-900">
+            <div onClick={onModalOpen} className="block w-36 h-62 rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-900">
                 <TERipple rippleColor="white">
                     <button
                         onClick={() => setShowModal(true)}
@@ -30,6 +43,7 @@ export default function MovieCard({ movie }) {
                     </p>
                 </div>
             </div>
+            <MovieModal showModal={showModal} setModal={setModal} />
         </>
     )
 }
