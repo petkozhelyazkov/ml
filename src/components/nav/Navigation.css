@@ -1,0 +1,7 @@
+.open {
+    transition: .1s ease-in-out;
+}
+
+.close {
+    transition: .1s ease-out;
+}
