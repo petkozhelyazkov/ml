@@ -1,24 +1,21 @@
-import { useNavigate } from 'react-router-dom'
-import './Register.css'
-import FormInput from "./FormInput";
-import { signUp } from "../../apis/firebase/authService";
-import AuthForm from "./AuthForm";
+import FormInput from "./FormInput"
+import AuthForm from "./AuthForm"
+import { signIn } from "../../apis/firebase/authService";
+import { useNavigate } from "react-router-dom";
 
-export default function Register() {
+export default function Login() {
     const navigate = useNavigate();
 
     function onSubmit(e) {
-        e.preventDefault();
-
+        e.preventDefault(e)
         let { email, password } = Object.fromEntries(new FormData(e.target));
-        signUp(email, password)
+        signIn(email, password)
             .then(navigate('/'))
             .catch()//TODO
     }
 
-
     return (
-        <AuthForm type='register' onSubmit={onSubmit}>
+        <AuthForm onSubmit={onSubmit} type='login'>
             <FormInput label='E-mail' name='email' type='text' />
             <FormInput label='Password' name='password' type='password' />
         </AuthForm>
