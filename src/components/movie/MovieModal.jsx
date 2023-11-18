@@ -44,7 +44,7 @@ export default function MovieModal({
                                         <div className="font-black flex flex-col">
                                             <span className="text-yellow-500 text-xl">IMDB SCORE</span>
                                             <span className="text-3xl flex gap-x-1 items-center text-gray-400">
-                                                {movie?.vote_average.toFixed(2)}
+                                                {movie?.vote_average.toFixed(1)}
                                             </span>
                                         </div>
                                         <div>

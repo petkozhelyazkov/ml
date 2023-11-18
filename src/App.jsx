@@ -6,6 +6,7 @@ import { MovieProvider } from "./contexts/MovieContext"
 import { AuthProvider } from "./contexts/AuthContext"
 import Register from "./components/Auth/Register"
 import Login from "./components/Auth/Login"
+import Search from "./components/Search/Search"
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <AuthProvider>
           <MovieProvider>
             <Navigation />
+            <Search />
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/register" element={<Register />} />

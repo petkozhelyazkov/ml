@@ -16,8 +16,8 @@ function Home() {
     }, [])
     return (
         <>
-            <main className="ml-20 bg-slate-600">
-                <div className="grid grid-cols-8 gap-1">
+            <main className="ml-16 flex justify-center bg-slate-600">
+                <div className="grid grid-cols-8 gap-6 pt-8">
                     {movies?.map(x => <MovieCard key={x.id} movie={x} />)}
                 </div>
             </main>
