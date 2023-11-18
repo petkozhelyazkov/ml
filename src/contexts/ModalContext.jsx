@@ -1,8 +1,8 @@
 import { createContext, useState } from 'react';
 
-export const MovieContext = createContext();
+export const ModalContext = createContext();
 
-export function MovieProvider({ children }) {
+export function ModalProvider({ children }) {
     const [movie, setMovie] = useState();
 
     function updateMovie(movie) {
@@ -10,9 +10,9 @@ export function MovieProvider({ children }) {
     }
 
     return (
-        <MovieContext.Provider
+        <ModalContext.Provider
             value={{ movie, updateMovie }}>
             {children}
-        </MovieContext.Provider>
+        </ModalContext.Provider>
     )
 }

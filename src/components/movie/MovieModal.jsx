@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import { MovieContext } from "../../contexts/MovieContext";
+import { ModalContext } from "../../contexts/ModalContext";
 import { Link } from "react-router-dom";
 
 import {
@@ -11,7 +11,7 @@ export default function MovieModal({
     showModal,
     setModal
 }) {
-    const { movie } = useContext(MovieContext)
+    const { movie } = useContext(ModalContext)
 
     function test() {
         setModal(false)

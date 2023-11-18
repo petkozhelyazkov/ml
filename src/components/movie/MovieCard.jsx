@@ -6,10 +6,10 @@ import {
 } from "tw-elements-react";
 
 import MovieModal from "./MovieModal";
-import { MovieContext } from "../../contexts/MovieContext";
+import { ModalContext } from "../../contexts/ModalContext";
 
 export default function MovieCard({ movie }) {
-    const { updateMovie } = useContext(MovieContext)
+    const { updateMovie } = useContext(ModalContext)
     const [showModal, setShowModal] = useState();
 
     function setModal(x) {
