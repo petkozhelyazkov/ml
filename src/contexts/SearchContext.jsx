@@ -3,11 +3,12 @@ import { createContext, useState } from 'react';
 export const SearchContext = createContext();
 
 export function SearchProvider({ children }) {
-    const [criteria, setCriteria] = useState();
+    const [criteria, setCriteria] = useState({ query: '', genre: '' });
 
     function updateCriteria(criteria) {
-        setCriteria(criteria)
+        setCriteria(x => ({ ...x, ...criteria }))
     }
+
 
     return (
         <SearchContext.Provider

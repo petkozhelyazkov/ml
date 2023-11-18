@@ -13,3 +13,19 @@ export function getTrendingMovies() {
     })
         .then(response => response.json())
 }
+
+export function getMoviesByQuery(query) {
+    return fetch(BASE_URL + `search/movie?query=${query}&language=en-US&page=1`, {
+        method: 'GET',
+        headers
+    })
+        .then(response => response.json())
+}
+
+export function getMoviesByGenre(genre) {
+    return fetch(BASE_URL + `discover/movie?with_genres=${genre}&language=en-US&page=1`, {
+        method: 'GET',
+        headers
+    })
+        .then(response => response.json())
+}

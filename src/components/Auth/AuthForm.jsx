@@ -1,5 +1,6 @@
 import { TERipple } from "tw-elements-react"
 import { Link } from "react-router-dom"
+import './AuthForm.css'
 
 export default function AuthForm({
     children,

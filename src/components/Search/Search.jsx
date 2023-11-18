@@ -1,5 +1,7 @@
 import './Search.css'
 import Chip from './Chip'
+import { useContext, useEffect, useState } from 'react'
+import { SearchContext } from '../../contexts/SearchContext'
 
 const genres = [
     { "id": 28, "genre": "Action" },
@@ -19,10 +21,26 @@ const genres = [
 ]
 
 export default function Search() {
+    const { updateCriteria } = useContext(SearchContext)
+    const [query, setQuery] = useState('')
+
+    useEffect(() => {
+        const debounce = setTimeout(() => {
+            updateCriteria({ query: query })
+        }, 2000)
+
+        return () => clearTimeout(debounce)
+    }, [query])
+
+    function onChange(e) {
+        setQuery(e.target.value)
+    }
+
     return (
         <div className='gradient w-full h-48 flex flex-col justify-center items-center'>
             <div className="mb-3 w-1/3">
                 <input
+                    onChange={onChange}
                     type="search"
                     className="relative m-0 block w-full
                             bg-gray-700 text-white min-w-0
@@ -37,7 +55,7 @@ export default function Search() {
                     placeholder="Search" />
             </div>
             <div className='w-1/2 flex flex-wrap justify-center px-2'>
-                {genres.map(x => <Chip key={x.id} {...x} />)}
+                {genres.map(x => <Chip updateCriteria={updateCriteria} key={x.id} {...x} />)}
             </div>
 
         </div>

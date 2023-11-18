@@ -2,10 +2,16 @@ import { TERipple } from "tw-elements-react"
 
 export default function Chip({
     genre,
-    id
+    id,
+    updateCriteria
 }) {
+    function onClick() {
+        updateCriteria({ genre: id })
+    }
+
     return (
         <div
+            onClick={onClick}
             className="
             [word-wrap: break-word]
             my-[5px] mr-4 flex h-10

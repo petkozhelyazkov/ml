@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom'
-import './Register.css'
 import FormInput from "./FormInput";
 import { signUp } from "../../apis/firebase/authService";
 import AuthForm from "./AuthForm";
