@@ -21,12 +21,12 @@ const genres = [
 ]
 
 export default function Search() {
-    const { updateCriteria } = useContext(SearchContext)
+    const { updateQuery, updateGenre } = useContext(SearchContext)
     const [query, setQuery] = useState('')
 
     useEffect(() => {
         const debounce = setTimeout(() => {
-            updateCriteria({ query: query })
+            updateQuery(query)
         }, 2000)
 
         return () => clearTimeout(debounce)
@@ -55,7 +55,7 @@ export default function Search() {
                     placeholder="Search" />
             </div>
             <div className='w-1/2 flex flex-wrap justify-center px-2'>
-                {genres.map(x => <Chip updateCriteria={updateCriteria} key={x.id} {...x} />)}
+                {genres.map(x => <Chip updateGenre={updateGenre} key={x.id} {...x} />)}
             </div>
 
         </div>

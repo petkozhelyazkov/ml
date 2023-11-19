@@ -5,3 +5,8 @@
 .close {
     transition: .1s ease-out;
 }
+
+.svg {
+    -webkit-filter: invert(.75);
+    filter: invert(.75);
+}

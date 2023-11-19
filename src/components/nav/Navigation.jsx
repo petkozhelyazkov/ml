@@ -3,8 +3,6 @@ import './Navigation.css'
 import NavigationItem from "./NavigationItem"
 import Separator from "./Separator"
 import NavigationUser from "./NavigationUser"
-import { Link } from "react-router-dom"
-
 
 export default function Navigation() {
     const [open, setOpen] = useState(false)
@@ -13,53 +11,27 @@ export default function Navigation() {
         <nav>
             <div className="space-x-6 z-20 fixed h-screen bg-gray-900">
                 {open ?
-                    <div onMouseLeave={() => setOpen(false)} className="open flex flex-col rounded-r-3xl items-center w-40 h-full overflow-hidden text-gray-400 bg-gray-900" >
+                    <div onMouseLeave={() => setOpen(false)} className="open flex flex-col items-center w-40 h-full overflow-hidden text-gray-400 bg-gray-900" >
                         <NavigationItem to='/'>
-                            <img className="mx-auto w-16" src="https://img.icons8.com/nolan/96/movie.png" alt="movie" />
+                            <img className="mx-auto w-16" src="/movies.png" />
                         </NavigationItem>
                         <Separator>
-                            <NavigationItem label='Home' to='/'>
-                                <svg className="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                                </svg>
+                            <NavigationItem label='Trending' to='/'>
+                                <img className="svg w-6 h-6 mr-[-6px] stroke-current" src="/trending.png" />
                             </NavigationItem>
-                            <NavigationItem>
-                                <svg className="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                                </svg>
-                                <span className="ml-2 text-sm font-medium">Search</span>
+                            <NavigationItem label='Latest' to='/latest'>
+                                <img className="svg w-6 h-6 stroke-current" src="/latest.png" />
                             </NavigationItem>
-                            <NavigationItem>
-                                <svg className="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                </svg>
-                                <span className="ml-2 text-sm font-medium">Insights</span>
-                            </NavigationItem>
-                            <NavigationItem>
-                                <svg className="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
-                                </svg>
-                                <span className="ml-2 text-sm font-medium">Docs</span>
+                            <NavigationItem label='Upcoming'>
+                                <img className="svg w-6 h-6 stroke-current" src="/upcoming.png" />
                             </NavigationItem>
                         </Separator>
                         <Separator>
-                            <NavigationItem>
-                                <svg className="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                                </svg>
-                                <span className="ml-2 text-sm font-medium">Products</span>
+                            <NavigationItem label='Liked' to='/liked'>
+                                <img className="svg w-6 h-6 stroke-current" src="/liked.png" />
                             </NavigationItem>
-                            <NavigationItem>
-                                <svg className="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
-                                </svg>
-                                <span className="ml-2 text-sm font-medium">Settings</span>
-                            </NavigationItem>
-                            <NavigationItem>
-                                <svg className="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
-                                </svg>
-                                <span className="ml-2 text-sm font-medium">Messages</span>
+                            <NavigationItem label='Favorite' to='/favorite'>
+                                <img className="svg w-6 h-6 stroke-current" src="/favorite.png" />
                             </NavigationItem>
                         </Separator>
                         <NavigationUser to={'/register'}>
@@ -72,43 +44,25 @@ export default function Navigation() {
                     :
                     <div onMouseOver={() => setOpen(true)} className="close flex flex-col items-center w-16 h-full overflow-hidden text-gray-400 bg-gray-900 rounded">
                         <NavigationItem>
-                            <img className="mx-auto w-16" src="https://img.icons8.com/nolan/96/movie.png" alt="movie" />
+                            <img className="mx-auto w-16" src="/movies.png" alt="movie" />
                         </NavigationItem>
                         <Separator>
                             <NavigationItem>
-                                <svg className="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                                </svg>
+                                <img className="svg w-6 h-6 stroke-current" src="/trending.png" />
                             </NavigationItem>
                             <NavigationItem>
-                                <svg className="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                                </svg>
+                                <img className="svg w-6 h-6 stroke-current" src="/latest.png" />
                             </NavigationItem>
                             <NavigationItem>
-                                <svg className="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                </svg>
-                            </NavigationItem>
-                            <NavigationItem>
-                                <svg className="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
-                                </svg>
+                                <img className="svg w-6 h-6 stroke-current" src="/upcoming.png" />
                             </NavigationItem>
                         </Separator>
                         <Separator>
                             <NavigationItem>
-                                <svg className="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                                </svg>
-                            </NavigationItem><NavigationItem>
-                                <svg className="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
-                                </svg>
-                            </NavigationItem><NavigationItem>
-                                <svg className="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
-                                </svg>
+                                <img className="svg w-6 h-6 stroke-current" src="/liked.png" />
+                            </NavigationItem>
+                            <NavigationItem>
+                                <img className="svg w-6 h-6 stroke-current" src="/favorite.png" />
                             </NavigationItem>
                         </Separator>
                         <NavigationUser>

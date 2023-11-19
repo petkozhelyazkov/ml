@@ -3,10 +3,10 @@ import { TERipple } from "tw-elements-react"
 export default function Chip({
     genre,
     id,
-    updateCriteria
+    updateGenre
 }) {
     function onClick() {
-        updateCriteria({ genre: id })
+        updateGenre(id)
     }
 
     return (

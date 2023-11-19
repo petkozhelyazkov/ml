@@ -6,34 +6,33 @@ import Search from "../Search/Search";
 
 function Home() {
     const [movies, setMovies] = useState();
-    const { criteria } = useContext(SearchContext)
+    const { query, genre } = useContext(SearchContext)
 
     useEffect(() => {
-        if (criteria.query != '') {
-            getMoviesByQuery(criteria.query)
+        if (query != '') {
+            getMoviesByQuery(query)
                 .then(x => {
                     setMovies(x.results)
                     // console.log(x);
                 })
                 .catch(x => console.log(x))
-            // } else if(criteria.genre=''){
-            //     getTrendingMovies()
-            //         .then(x => {
-            //             setMovies(x.results)
-            //             // console.log(x);
-            //         })
-            //         .catch(x => console.log(x))
         } else {
-            getMoviesByGenre(criteria.genre)
+            getTrendingMovies()
                 .then(x => {
                     setMovies(x.results)
                     // console.log(x);
                 })
                 .catch(x => console.log(x))
         }
+    }, [query])
 
-        console.log(criteria);
-    }, [criteria])
+    useEffect(() => {
+        getMoviesByGenre(genre)
+            .then(x => {
+                setMovies(x.results)
+            })
+            .catch(x => console.log(x))
+    }, [genre])
 
     return (
         <>
