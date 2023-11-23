@@ -1,26 +1,26 @@
 import { useContext, useEffect, useState } from "react"
-import { getMoviesByGenre, getMoviesByQuery, getTrendingMovies } from "../../apis/tmdb/tmdb";
+import { getMoviesByGenre, getMoviesByQuery, getMoviesByType } from "../../apis/tmdb/tmdb";
 import MovieCard from "../movie/MovieCard";
 import { SearchContext } from "../../contexts/SearchContext";
 import Search from "../Search/Search";
+import { useLocation } from "react-router-dom";
 
-function Home() {
+export default function Home() {
     const [movies, setMovies] = useState();
-    const { query, genre } = useContext(SearchContext)
+    const { query, genre, type } = useContext(SearchContext)
+    const location = useLocation();
 
     useEffect(() => {
         if (query != '') {
             getMoviesByQuery(query)
                 .then(x => {
                     setMovies(x.results)
-                    // console.log(x);
                 })
                 .catch(x => console.log(x))
         } else {
-            getTrendingMovies()
+            getMoviesByType('trending')
                 .then(x => {
                     setMovies(x.results)
-                    // console.log(x);
                 })
                 .catch(x => console.log(x))
         }
@@ -34,6 +34,19 @@ function Home() {
             .catch(x => console.log(x))
     }, [genre])
 
+    useEffect(() => {
+        let path = location.pathname
+        let type = path == '/' ? 'trending' : path.slice(path.lastIndexOf('/') + 1)
+
+        getMoviesByType(type)
+            .then(x => {
+                setMovies(x.results)
+            })
+            .catch(x => console.log(x))
+
+
+    }, [location])
+
     return (
         <>
             <Search />
@@ -45,5 +58,3 @@ function Home() {
         </>
     )
 }
-
-export default Home

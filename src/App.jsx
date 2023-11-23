@@ -5,11 +5,10 @@ import MovieDetails from "./components/movie/MovieDetails"
 import { AuthProvider } from "./contexts/AuthContext"
 import Register from "./components/Auth/Register"
 import Login from "./components/Auth/Login"
-import Search from "./components/Search/Search"
 import { ModalProvider } from "./contexts/ModalContext"
 import { SearchProvider } from "./contexts/SearchContext"
 
-function App() {
+export default function App() {
   return (
     <>
       <BrowserRouter>
@@ -19,6 +18,16 @@ function App() {
               <Navigation />
               <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="/movies" element={<Home />}>
+                  <Route path="trending" element={<Home />} />
+                  <Route path="upcoming" element={<Home />} />
+                  <Route path="top-rated" element={<Home />} />
+                </Route>
+                <Route path="/shows" element={<Home />}>
+                  <Route path="trending" element={<Home />} />
+                  <Route path="upcoming" element={<Home />} />
+                  <Route path="top-rated" element={<Home />} />
+                </Route>
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/movie/:id" element={<MovieDetails />} />
@@ -30,5 +39,3 @@ function App() {
     </>
   )
 }
-
-export default App

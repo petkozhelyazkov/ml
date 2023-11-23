@@ -1,11 +1,32 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import './Navigation.css'
 import NavigationItem from "./NavigationItem"
 import Separator from "./Separator"
 import NavigationUser from "./NavigationUser"
+import { SearchContext } from "../../contexts/SearchContext"
+
+const movieNav = [
+    { label: 'Trending', path: '/movies/trending', img: '/trending.png' },
+    { label: 'Upcoming', path: '/movies/upcoming', img: '/upcoming.png' },
+    { label: 'Top rated', path: '/movies/top-rated', img: '/top.png' }
+]
+const showNav = [
+    { label: 'Trending', path: '/shows/trending', img: '/trending.png' },
+    { label: 'Upcoming', path: '/shows/upcoming', img: '/upcoming.png' },
+    { label: 'Top rated', path: '/shows/top-rated', img: '/top.png' }
+]
+const userNav = [
+    { label: 'Liked', path: '/liked', img: '/liked.png' },
+    { label: 'Favorite', path: '/favorite', img: '/favorite.png' },
+]
 
 export default function Navigation() {
     const [open, setOpen] = useState(false)
+    const { updateType } = useContext(SearchContext);
+
+    function onClick(type) {
+        updateType(type.slice(1))
+    }
 
     return (
         <nav>
@@ -15,24 +36,26 @@ export default function Navigation() {
                         <NavigationItem to='/'>
                             <img className="mx-auto w-16" src="/movies.png" />
                         </NavigationItem>
-                        <Separator>
-                            <NavigationItem label='Trending' to='/'>
-                                <img className="svg w-6 h-6 mr-[-6px] stroke-current" src="/trending.png" />
-                            </NavigationItem>
-                            <NavigationItem label='Latest' to='/latest'>
-                                <img className="svg w-6 h-6 stroke-current" src="/latest.png" />
-                            </NavigationItem>
-                            <NavigationItem label='Upcoming'>
-                                <img className="svg w-6 h-6 stroke-current" src="/upcoming.png" />
-                            </NavigationItem>
+                        <Separator label='Movies'>
+                            {movieNav.map((x, i) =>
+                                <NavigationItem onClick={() => { onClick(x.path) }} key={i} label={x.label} to={x.path}>
+                                    <img className="svg w-6 h-6 stroke-current" src={x.img} />
+                                </NavigationItem>
+                            )}
+                        </Separator>
+                        <Separator label='TV shows'>
+                            {showNav.map((x, i) =>
+                                <NavigationItem onClick={() => { onClick(x.path) }} key={i} label={x.label} to={x.path}>
+                                    <img className="svg w-6 h-6 stroke-current" src={x.img} />
+                                </NavigationItem>
+                            )}
                         </Separator>
                         <Separator>
-                            <NavigationItem label='Liked' to='/liked'>
-                                <img className="svg w-6 h-6 stroke-current" src="/liked.png" />
-                            </NavigationItem>
-                            <NavigationItem label='Favorite' to='/favorite'>
-                                <img className="svg w-6 h-6 stroke-current" src="/favorite.png" />
-                            </NavigationItem>
+                            {userNav.map((x, i) =>
+                                <NavigationItem key={i} label={x.label} to={x.path}>
+                                    <img className="svg w-6 h-6 stroke-current" src={x.img} />
+                                </NavigationItem>
+                            )}
                         </Separator>
                         <NavigationUser to={'/register'}>
                             <svg className="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -47,23 +70,25 @@ export default function Navigation() {
                             <img className="mx-auto w-16" src="/movies.png" alt="movie" />
                         </NavigationItem>
                         <Separator>
-                            <NavigationItem>
-                                <img className="svg w-6 h-6 stroke-current" src="/trending.png" />
-                            </NavigationItem>
-                            <NavigationItem>
-                                <img className="svg w-6 h-6 stroke-current" src="/latest.png" />
-                            </NavigationItem>
-                            <NavigationItem>
-                                <img className="svg w-6 h-6 stroke-current" src="/upcoming.png" />
-                            </NavigationItem>
+                            {movieNav.map((x, i) =>
+                                <NavigationItem key={i}>
+                                    <img className="svg w-6 h-6 stroke-current" src={x.img} />
+                                </NavigationItem>
+                            )}
                         </Separator>
                         <Separator>
-                            <NavigationItem>
-                                <img className="svg w-6 h-6 stroke-current" src="/liked.png" />
-                            </NavigationItem>
-                            <NavigationItem>
-                                <img className="svg w-6 h-6 stroke-current" src="/favorite.png" />
-                            </NavigationItem>
+                            {showNav.map((x, i) =>
+                                <NavigationItem key={i}>
+                                    <img className="svg w-6 h-6 stroke-current" src={x.img} />
+                                </NavigationItem>
+                            )}
+                        </Separator>
+                        <Separator>
+                            {userNav.map((x, i) =>
+                                <NavigationItem key={i}>
+                                    <img className="svg w-6 h-6 stroke-current" src={x.img} />
+                                </NavigationItem>
+                            )}
                         </Separator>
                         <NavigationUser>
                             <svg className="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
