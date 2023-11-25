@@ -3,7 +3,7 @@ import Chip from './Chip'
 import { useContext, useEffect, useState } from 'react'
 import { SearchContext } from '../../contexts/SearchContext'
 
-const genres = [
+const movieGenres = [
     { "id": 28, "genre": "Action" },
     { "id": 12, "genre": "Adventure" },
     { "id": 35, "genre": "Comedy" },
@@ -20,7 +20,17 @@ const genres = [
     { "id": 10752, "genre": "War" },
 ]
 
-export default function Search() {
+const tvGenres = [
+    { "id": 35, "genre": "Comedy" },
+    { "id": 80, "genre": "Crime" },
+    { "id": 99, "genre": "Documentary" },
+    { "id": 18, "genre": "Drama" },
+    { "id": 36, "genre": "History" },
+    { "id": 9648, "genre": "Mystery" },
+    { "id": 10749, "genre": "Romance" },
+]
+
+export default function Search({ mediaType }) {
     const { updateQuery, updateGenre } = useContext(SearchContext)
     const [query, setQuery] = useState('')
 
@@ -31,6 +41,10 @@ export default function Search() {
 
         return () => clearTimeout(debounce)
     }, [query])
+
+    useEffect(() => {
+        console.log(mediaType);
+    }, [mediaType])
 
     function onChange(e) {
         setQuery(e.target.value)
@@ -55,7 +69,11 @@ export default function Search() {
                     placeholder="Search" />
             </div>
             <div className='w-1/2 flex flex-wrap justify-center px-2'>
-                {genres.map(x => <Chip updateGenre={updateGenre} key={x.id} {...x} />)}
+                {
+                    mediaType == 'movies'
+                        ? movieGenres.map(x => <Chip updateGenre={updateGenre} key={x.id} {...x} />)
+                        : tvGenres.map(x => <Chip updateGenre={updateGenre} key={x.id} {...x} />)
+                }
             </div>
 
         </div>

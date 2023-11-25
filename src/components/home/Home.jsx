@@ -45,7 +45,7 @@ export default function Home() {
 
     return (
         <>
-            <Search />
+            <Search mediaType={mediaType} />
             <main className="ml-16 flex justify-center dark:bg-gray-800">
                 <div className="flex flex-col mt-8">
                     <div className="flex justify-center font-bold text-3xl dark:text-neutral-50">
