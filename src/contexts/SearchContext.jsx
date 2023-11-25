@@ -5,7 +5,7 @@ export const SearchContext = createContext();
 export function SearchProvider({ children }) {
     const [query, setQuery] = useState('');
     const [genre, setGenre] = useState('');
-    const [type, setType] = useState('trending')
+    const [mediaType, setMediaType] = useState('')
 
     function updateQuery(query) {
         setQuery(x => query)
@@ -15,13 +15,13 @@ export function SearchProvider({ children }) {
         setGenre(x => genre)
     }
 
-    function updateType(type) {
-        setType(x => type);
+    function updateMediaType(mediaType) {
+        setMediaType(x => mediaType);
     }
 
     return (
         <SearchContext.Provider
-            value={{ query, updateQuery, genre, updateGenre, type, updateType }}>
+            value={{ query, updateQuery, genre, updateGenre, mediaType, updateMediaType }}>
             {children}
         </SearchContext.Provider>
     )

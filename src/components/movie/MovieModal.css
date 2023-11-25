@@ -1,0 +1,9 @@
+.scroll {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    position: fixed;
+}
+
+.scroll::-webkit-scrollbar {
+    display: none;
+}

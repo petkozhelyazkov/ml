@@ -25,12 +25,14 @@ export default function App() {
                 </Route>
                 <Route path="/shows" element={<Home />}>
                   <Route path="trending" element={<Home />} />
-                  <Route path="upcoming" element={<Home />} />
                   <Route path="top-rated" element={<Home />} />
                 </Route>
+
+                <Route path="/movie/:id" element={<MovieDetails />} />
+                <Route path="/show/:id" element={<MovieDetails />} />
+
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/movie/:id" element={<MovieDetails />} />
               </Routes>
             </ModalProvider>
           </SearchProvider>

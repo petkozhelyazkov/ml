@@ -1,6 +1,7 @@
 import { useContext } from "react"
 import { ModalContext } from "../../contexts/ModalContext";
 import { Link } from "react-router-dom";
+import './MovieModal.css'
 
 import {
     TEModal,
@@ -13,15 +14,15 @@ export default function MovieModal({
 }) {
     const { movie } = useContext(ModalContext)
 
-    function test() {
+    function hideModal() {
         setModal(false)
     }
 
     return (
-        <TEModal show={showModal} setShow={setModal}>
+        <TEModal className="scroll" show={showModal} setShow={setModal}>
             <TEModalDialog>
                 <div
-                    className="pointer-events-auto relative w-3/4 translate-y-[-50px] translate-x-[50px]">
+                    className="scroll pointer-events-auto relative w-3/4 translate-y-[-50px] translate-x-[50px]">
                     <div className='flex items-center justify-center h-screen bg-transparent'>
                         <div className='mx-auto bg-white rounded-xl shadow-xl'>
                             <div className="grid max-w-sm shadow-sm flex-col">
@@ -33,7 +34,7 @@ export default function MovieModal({
                                         {movie?.title}
                                     </a>
                                     <span className="text-gray-400 pt-2 font-semibold">
-                                        {movie?.release_date.substring(0, 4)}
+                                        {(movie?.type == 'shows' ? movie?.first_air_date : movie?.release_date)?.substring(0, 4)}
                                     </span>
                                     <div className="h-28">
                                         <span className="line-clamp-4 py-2 text-gray-400 font-light bg-gray-900 leading-relaxed">
@@ -48,7 +49,7 @@ export default function MovieModal({
                                             </span>
                                         </div>
                                         <div>
-                                            <Link onClick={test} type="button" to={`/movie/${movie?.id}`} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                            <Link onClick={hideModal} type="button" to={`/${movie?.mediaType == 'shows' ? 'show' : 'movie'}/${movie?.id}`} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                                 More</Link>
                                         </div>
                                     </div>

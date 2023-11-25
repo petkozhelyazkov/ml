@@ -12,7 +12,6 @@ const movieNav = [
 ]
 const showNav = [
     { label: 'Trending', path: '/shows/trending', img: '/trending.png' },
-    { label: 'Upcoming', path: '/shows/upcoming', img: '/upcoming.png' },
     { label: 'Top rated', path: '/shows/top-rated', img: '/top.png' }
 ]
 const userNav = [
@@ -22,10 +21,10 @@ const userNav = [
 
 export default function Navigation() {
     const [open, setOpen] = useState(false)
-    const { updateType } = useContext(SearchContext);
+    const { updateMediaType } = useContext(SearchContext);
 
     function onClick(type) {
-        updateType(type.slice(1))
+        updateMediaType(type.slice(type.indexOf('/') + 1, type.lastIndexOf('/')))
     }
 
     return (
@@ -69,14 +68,14 @@ export default function Navigation() {
                         <NavigationItem>
                             <img className="mx-auto w-16" src="/movies.png" alt="movie" />
                         </NavigationItem>
-                        <Separator>
+                        <Separator label='Movies'>
                             {movieNav.map((x, i) =>
                                 <NavigationItem key={i}>
                                     <img className="svg w-6 h-6 stroke-current" src={x.img} />
                                 </NavigationItem>
                             )}
                         </Separator>
-                        <Separator>
+                        <Separator label='Shows'>
                             {showNav.map((x, i) =>
                                 <NavigationItem key={i}>
                                     <img className="svg w-6 h-6 stroke-current" src={x.img} />
