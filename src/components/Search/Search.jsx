@@ -42,10 +42,6 @@ export default function Search({ mediaType }) {
         return () => clearTimeout(debounce)
     }, [query])
 
-    useEffect(() => {
-        console.log(mediaType);
-    }, [mediaType])
-
     function onChange(e) {
         setQuery(e.target.value)
     }
@@ -74,6 +70,7 @@ export default function Search({ mediaType }) {
                         ? movieGenres.map(x => <Chip updateGenre={updateGenre} key={x.id} {...x} />)
                         : tvGenres.map(x => <Chip updateGenre={updateGenre} key={x.id} {...x} />)
                 }
+                <Chip updateGenre={() => { updateGenre('') }} genre='Remove' />
             </div>
 
         </div>

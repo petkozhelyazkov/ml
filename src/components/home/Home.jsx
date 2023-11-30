@@ -12,8 +12,6 @@ export default function Home() {
     const { query, genre, mediaType } = useContext(SearchContext)
     const location = useLocation();
 
-    const setModal = (x) => setShowModal(x)
-
 
     useEffect(() => {
         if (query != '') {
@@ -42,6 +40,8 @@ export default function Home() {
             })
             .catch(x => console.log(x))
     }, [genre])
+
+    const setModal = (x) => setShowModal(x)
 
     return (
         <>

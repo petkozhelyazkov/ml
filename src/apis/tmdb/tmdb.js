@@ -37,5 +37,21 @@ export function getByGenre(genre, mediaType) {
         method: 'GET',
         headers
     })
-        .then(response => response.json())
+        .then(x => x.json())
+}
+
+export function getMovieById(id) {
+    return fetch(BASE_URL + `movie/${id}}`, {
+        method: 'GET',
+        headers
+    })
+        .then(x => x.json())
+}
+
+export function getMovieCredits(id) {
+    return fetch(BASE_URL + `movie/${id}}/credits`, {
+        method: 'GET',
+        headers
+    })
+        .then(x => x.json())
 }
