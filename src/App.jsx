@@ -7,36 +7,44 @@ import Register from "./components/Auth/Register"
 import Login from "./components/Auth/Login"
 import { ModalProvider } from "./contexts/ModalContext"
 import { SearchProvider } from "./contexts/SearchContext"
+import { AlertProvider } from "./contexts/AlertContext"
+import Alert from "./components/Alert/Alert"
+import Logout from "./components/Auth/Logout"
 
 export default function App() {
   return (
     <>
       <BrowserRouter>
-        <AuthProvider>
-          <SearchProvider>
-            <ModalProvider>
-              <Navigation />
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/movies" element={<Home />}>
-                  <Route path="trending" element={<Home />} />
-                  <Route path="upcoming" element={<Home />} />
-                  <Route path="top-rated" element={<Home />} />
-                </Route>
-                <Route path="/shows" element={<Home />}>
-                  <Route path="trending" element={<Home />} />
-                  <Route path="top-rated" element={<Home />} />
-                </Route>
+        <AlertProvider>
+          <AuthProvider>
+            <SearchProvider>
+              <ModalProvider>
+                <Navigation />
+                <Alert />
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/movies" element={<Home />}>
+                    <Route path="trending" element={<Home />} />
+                    <Route path="upcoming" element={<Home />} />
+                    <Route path="top-rated" element={<Home />} />
+                  </Route>
+                  <Route path="/shows" element={<Home />}>
+                    <Route path="trending" element={<Home />} />
+                    <Route path="top-rated" element={<Home />} />
+                  </Route>
 
-                <Route path="/movie/:id" element={<MovieDetails />} />
-                <Route path="/show/:id" element={<MovieDetails />} />
+                  <Route path="/movie/:id" element={<MovieDetails />} />
+                  <Route path="/show/:id" element={<MovieDetails />} />
 
-                <Route path="/register" element={<Register />} />
-                <Route path="/login" element={<Login />} />
-              </Routes>
-            </ModalProvider>
-          </SearchProvider>
-        </AuthProvider>
+                  <Route path="/register" element={<Register />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/logout" element={<Logout />} />
+
+                </Routes>
+              </ModalProvider>
+            </SearchProvider>
+          </AuthProvider>
+        </AlertProvider>
       </BrowserRouter>
     </>
   )
