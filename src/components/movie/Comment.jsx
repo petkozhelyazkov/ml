@@ -27,14 +27,20 @@ export default function Comment({
                 <footer className="flex justify-between items-center mb-2">
                     <div className="flex items-center">
                         <p className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
-                            <img
-                                className="mr-2 w-6 h-6 rounded-full"
-                                src="https://flowbite.com/docs/images/people/profile-picture-2.jpg"
-                                alt="Michael Gough" />{comment?.username}</p>
+                            {comment?.user?.imgUrl
+                                ? <img
+                                    className="mr-2 w-6 h-6 rounded-full"
+                                    src={comment?.user.imgUrl} />
+                                : <svg className="w-6 h-6 rounded-full text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd"></path></svg>
+                            }
+
+
+                            {comment?.user.displayName ? comment?.user.displayName : comment?.user.email}
+                        </p>
                         <p className="text-sm text-gray-600 dark:text-gray-400"><time pubdate='true' dateTime="2022-02-08"
                             title="February 8th, 2022">{comment?.date}</time></p>
                     </div>
-                    {comment?.username == currentUser?.email &&
+                    {comment?.user.id == currentUser?.uid &&
                         <TEDropdown className="flex justify-center">
                             <TERipple rippleColor="light">
                                 <TEDropdownToggle className="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-40 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600">

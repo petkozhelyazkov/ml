@@ -7,8 +7,6 @@ import {
     arrayUnion,
     updateDoc
 } from "firebase/firestore";
-import uuid from "react-uuid";
-
 
 app();
 const db = getFirestore();

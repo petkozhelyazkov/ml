@@ -51,7 +51,12 @@ export default function CommentSection({
         if (user?.email) {
             let newComment = {
                 comment,
-                username: user.email,
+                user: {
+                    id: user.uid,
+                    email: user.email,
+                    displayName: user.displayName ? user.displayName : '',
+                    imgUrl: user.imgUrl ? user.imgUrl : '',
+                },
                 date: formattedDate,
                 id: uuid()
             }

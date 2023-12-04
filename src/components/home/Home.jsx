@@ -5,13 +5,13 @@ import { SearchContext } from "../../contexts/SearchContext";
 import Search from "../Search/Search";
 import { useLocation } from "react-router-dom";
 import MovieModal from "../movie/MovieModal";
+import { AuthContext } from "../../contexts/AuthContext";
 
 export default function Home() {
     const [movies, setMovies] = useState();
     const [showModal, setShowModal] = useState();
     const { query, genre, mediaType } = useContext(SearchContext)
     const location = useLocation();
-
 
     useEffect(() => {
         if (query != '') {

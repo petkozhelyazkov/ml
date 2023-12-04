@@ -10,6 +10,7 @@ import { SearchProvider } from "./contexts/SearchContext"
 import { AlertProvider } from "./contexts/AlertContext"
 import Alert from "./components/Alert/Alert"
 import Logout from "./components/Auth/Logout"
+import Profile from "./components/Profile/Profile"
 
 export default function App() {
   return (
@@ -39,6 +40,8 @@ export default function App() {
                   <Route path="/register" element={<Register />} />
                   <Route path="/login" element={<Login />} />
                   <Route path="/logout" element={<Logout />} />
+                  <Route path="/profile" element={<Profile />} />
+
 
                 </Routes>
               </ModalProvider>
