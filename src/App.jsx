@@ -36,13 +36,14 @@ export default function App() {
 
                   <Route path="/movie/:id" element={<MovieDetails />} />
                   <Route path="/show/:id" element={<MovieDetails />} />
+                  <Route path="/profile" element={<Profile />} >
+                    <Route path="liked" element={<Profile />} />
+                    <Route path="favorite" element={<Profile />} />
+                  </Route>
 
                   <Route path="/register" element={<Register />} />
                   <Route path="/login" element={<Login />} />
                   <Route path="/logout" element={<Logout />} />
-                  <Route path="/profile" element={<Profile />} />
-
-
                 </Routes>
               </ModalProvider>
             </SearchProvider>

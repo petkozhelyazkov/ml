@@ -27,6 +27,58 @@ export async function get(id) {
     }
 }
 
+export function removeLike(userId, id) {
+    const userRef = doc(db, "users", `${userId}`);
+
+    return get(userId).then(x => {
+        let newLiked = x.liked.filter(x => x.id != id)
+
+        updateDoc(userRef, {
+            liked: newLiked
+        });
+    })
+}
+
+export function removeFavorite(userId, id) {
+    const userRef = doc(db, "users", `${userId}`);
+
+    return get(userId).then(x => {
+        let newFavorite = x.favorite.filter(x => x.id != id)
+
+        updateDoc(userRef, {
+            favorite: newFavorite
+        });
+    })
+}
+
+export async function like(userId, like) {
+    const userRef = doc(db, 'users', userId);
+
+    if ((await getDoc(userRef)).exists()) {
+        await updateDoc(userRef, {
+            liked: arrayUnion(like)
+        }, { merge: true });
+    } else {
+        await setDoc(userRef, {
+            liked: [like]
+        })
+    }
+}
+
+export async function favorite(userId, favorite) {
+    const userRef = doc(db, 'users', userId);
+
+    if ((await getDoc(userRef)).exists()) {
+        await updateDoc(userRef, {
+            favorite: arrayUnion(favorite)
+        }, { merge: true });
+    } else {
+        await setDoc(userRef, {
+            favorite: [favorite]
+        })
+    }
+}
+
 export function updateProfile(id, changes) {
     const userRef = doc(db, 'users', id);
 

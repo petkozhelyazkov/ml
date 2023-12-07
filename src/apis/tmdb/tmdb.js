@@ -16,40 +16,40 @@ const tvEndpoints = {
     'top-rated': 'tv/top_rated',
 }
 
-export function getByQuery(query, mediaType) {
-    return fetch(BASE_URL + `search/${mediaType == 'shows' ? 'tv' : 'movie'}?query=${query}&language=en-US&page=1`, {
+export function getByQuery(query, mediaType, page = 1) {
+    return fetch(BASE_URL + `search/${mediaType == 'shows' ? 'tv' : 'movie'}?query=${query}&language=en-US&page=${page}`, {
         method: 'GET',
         headers
     })
         .then(x => x.json())
 }
 
-export function getByType(type, mediaType) {
-    return fetch(BASE_URL + (mediaType == 'shows' ? tvEndpoints[type] : movieEndpoints[type]), {
+export function getByType(type, mediaType, page = 1) {
+    return fetch(BASE_URL + (mediaType == 'shows' ? tvEndpoints[type] : movieEndpoints[type]) + `?language=en-US&page=${page}`, {
         method: 'GET',
         headers
     })
         .then(x => x.json())
 }
 
-export function getByGenre(genre, mediaType) {
-    return fetch(BASE_URL + `discover/${mediaType == 'shows' ? 'tv' : 'movie'}?with_genres=${genre}&language=en-US&page=1`, {
+export function getByGenre(genre, mediaType, page = 1) {
+    return fetch(BASE_URL + `discover/${mediaType == 'shows' ? 'tv' : 'movie'}?with_genres=${genre}&language=en-US&page=${page}`, {
         method: 'GET',
         headers
     })
         .then(x => x.json())
 }
 
-export function getMovieById(id) {
-    return fetch(BASE_URL + `movie/${id}}`, {
+export function getById(id, mediaType) {
+    return fetch(BASE_URL + `${mediaType == 'movie' ? 'movie' : 'tv'}/${id}}`, {
         method: 'GET',
         headers
     })
         .then(x => x.json())
 }
 
-export function getMovieCredits(id) {
-    return fetch(BASE_URL + `movie/${id}}/credits`, {
+export function getCredits(id, mediaType) {
+    return fetch(BASE_URL + `${mediaType == 'movie' ? 'movie' : 'tv'}/${id}}/credits`, {
         method: 'GET',
         headers
     })

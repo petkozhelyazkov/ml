@@ -31,10 +31,10 @@ export default function MovieModal({
                                     src={`https://image.tmdb.org/t/p/w500/${movie?.poster_path}`} />
                                 <div className="group p-6 grid bg-gray-900 z-10">
                                     <a className="text-gray-400 font-bold sm:text-2xl line-clamp-2">
-                                        {movie?.title}
+                                        {movie?.title || movie?.name}
                                     </a>
                                     <span className="text-gray-400 pt-2 font-semibold">
-                                        {(movie?.type == 'shows' ? movie?.first_air_date : movie?.release_date)?.substring(0, 4)}
+                                        {(movie?.release_date || movie?.first_air_date)?.substring(0, 4)}
                                     </span>
                                     <div className="h-28">
                                         <span className="line-clamp-4 py-2 text-gray-400 font-light bg-gray-900 leading-relaxed">

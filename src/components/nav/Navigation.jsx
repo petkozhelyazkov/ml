@@ -16,8 +16,8 @@ const showNav = [
     { label: 'Top rated', path: '/shows/top-rated', img: '/top.png' }
 ]
 const userNav = [
-    { label: 'Liked', path: '/liked', img: '/liked.png' },
-    { label: 'Favorite', path: '/favorite', img: '/favorite.png' },
+    { label: 'Liked', path: '/profile/liked', img: '/liked.png' },
+    { label: 'Favorite', path: '/profile/favorite', img: '/favorite.png' },
 ]
 
 export default function Navigation() {
@@ -29,9 +29,9 @@ export default function Navigation() {
         updateMediaType(type.slice(type.indexOf('/') + 1, type.lastIndexOf('/')))
     }
 
-    useEffect(() => {
-        console.log(user);
-    }, [open])
+    // useEffect(() => {
+    //     console.log(user);
+    // }, [open])
 
     return (
         <nav>

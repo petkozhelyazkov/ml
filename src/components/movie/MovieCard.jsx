@@ -30,7 +30,7 @@ export default function MovieCard({
                         focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]">
                         <img
                             className="rounded-t-lg w-full h-full"
-                            src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`}
+                            src={`https://image.tmdb.org/t/p/w200/${movie?.poster_path}`}
                             alt="" />
                     </button>
                 </TERipple>
