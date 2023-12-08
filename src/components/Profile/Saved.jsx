@@ -1,8 +1,9 @@
-import { useContext, useEffect, useState } from "react";
+import { lazy, useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import { useLocation } from "react-router-dom";
-import MovieList from "./MovieList";
-import ScrollToTop from "../ScrollToTop";
+
+const MovieList = lazy(() => import('./MovieList'))
+const ScrollToTop = lazy(() => import('../ScrollToTop'))
 
 import {
     TETabs,

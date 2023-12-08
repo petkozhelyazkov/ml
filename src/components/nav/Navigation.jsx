@@ -1,5 +1,5 @@
 import './Navigation.css'
-import { useContext, useState } from "react"
+import { useContext, useState, lazy } from "react"
 import { SearchContext } from "../../contexts/SearchContext"
 import { AuthContext } from "../../contexts/AuthContext"
 import { movieNav, showNav, userNav } from "../../utils/navPaths"
