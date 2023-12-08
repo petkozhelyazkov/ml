@@ -44,13 +44,14 @@ export default function MovieDetails() {
 
         getById(id, tempMediaType)
             .then(x => {
-                console.log(x);
                 setMovie(x)
             })
+            .catch(x => showAlert('Something went wrong!', alertType.error))
         getCredits(id, tempMediaType)
             .then(x => {
                 setCast(x.cast)
             })
+            .catch(x => showAlert('Something went wrong!', alertType.error))
     }, [])
 
     function onLike() {
@@ -62,12 +63,19 @@ export default function MovieDetails() {
         if (!user?.liked?.some(x => x.id == id)) {
             let temp = { id, mediaType }
             like(user.uid, temp)
-            updateUser(user.liked ? { liked: [...user.liked, temp] } : { liked: [temp] })
+                .then(x => {
+                    updateUser(user.liked ? { liked: [...user.liked, temp] } : { liked: [temp] })
+                })
+                .catch(x => showAlert('Something went wrong!', alertType.error))
+
         } else {
             removeLike(user.uid, movie.id)
-            let newLiked = user.liked.filter(x => x.id != movie.id)
-            updateUser({ liked: newLiked })
-            setIsLiked(false)
+                .then(x => {
+                    let newLiked = user.liked.filter(x => x.id != movie.id)
+                    updateUser({ liked: newLiked })
+                    setIsLiked(false)
+                })
+                .catch(x => showAlert('Something went wrong!', alertType.error))
         }
     }
 
@@ -80,12 +88,19 @@ export default function MovieDetails() {
         if (!user?.favorite?.some(x => x.id == id)) {
             let temp = { id, mediaType }
             favorite(user.uid, temp)
-            updateUser(user.favorite ? { favorite: [...user.favorite, temp] } : { favorite: [temp] })
+                .then(x => {
+                    updateUser(user.favorite ? { favorite: [...user.favorite, temp] } : { favorite: [temp] })
+                })
+                .catch(x => showAlert('Something went wrong!', alertType.error))
+
         } else {
             removeFavorite(user.uid, movie.id)
-            let newFavorite = user.favorite.filter(x => x.id != movie.id)
-            updateUser({ favorite: newFavorite })
-            setIsFavorite(false)
+                .then(x => {
+                    let newFavorite = user.favorite.filter(x => x.id != movie.id)
+                    updateUser({ favorite: newFavorite })
+                    setIsFavorite(false)
+                })
+                .catch(x => showAlert('Something went wrong!', alertType.error))
         }
     }
 

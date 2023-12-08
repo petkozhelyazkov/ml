@@ -55,11 +55,11 @@ export async function like(userId, like) {
     const userRef = doc(db, 'users', userId);
 
     if ((await getDoc(userRef)).exists()) {
-        await updateDoc(userRef, {
+        return await updateDoc(userRef, {
             liked: arrayUnion(like)
         }, { merge: true });
     } else {
-        await setDoc(userRef, {
+        return await setDoc(userRef, {
             liked: [like]
         })
     }
@@ -69,11 +69,11 @@ export async function favorite(userId, favorite) {
     const userRef = doc(db, 'users', userId);
 
     if ((await getDoc(userRef)).exists()) {
-        await updateDoc(userRef, {
+        return await updateDoc(userRef, {
             favorite: arrayUnion(favorite)
         }, { merge: true });
     } else {
-        await setDoc(userRef, {
+        return await setDoc(userRef, {
             favorite: [favorite]
         })
     }

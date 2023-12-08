@@ -10,8 +10,7 @@ import {
 
 export default function MovieModal({
     showModal,
-    setModal,
-    mediaType
+    setModal
 }) {
     const { movie } = useContext(ModalContext)
 

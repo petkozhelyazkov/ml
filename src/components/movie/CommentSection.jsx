@@ -19,6 +19,7 @@ export default function CommentSection({
             .then(x => {
                 setComments(x?.comments || [])
             })
+            .catch(x => showAlert('Could not get comments!', alertType.error))
     }, [])
 
     function onEdit(comment) {
@@ -28,8 +29,11 @@ export default function CommentSection({
 
     function onRemove(comment) {
         commentService.remove(movieId, comment)
-        let newComments = comments.filter(x => x.id != comment.id)
-        setComments(newComments);
+            .then(x => {
+                let newComments = comments.filter(x => x.id != comment.id)
+                setComments(newComments);
+            })
+            .catch(x => showAlert('Something went wrong!', alertType.error))
     }
 
     function onSubmit(e) {
@@ -41,13 +45,17 @@ export default function CommentSection({
 
         if (editComment?.id) {
             commentService.edit(movieId, { ...editComment, comment })
-            let temp = comments.find(x => x.id == editComment.id)
-            temp.comment = comment
-            setEditComment({})
-            teRef.current.value = ''
+                .then(x => {
+                    let temp = comments.find(x => x.id == editComment.id)
+                    temp.comment = comment
+                    setEditComment({})
+                    teRef.current.value = ''
+                })
+                .catch(x => showAlert('Something went wrong!', alertType.error))
 
             return;
         }
+
         if (user?.email) {
             let newComment = {
                 comment,
@@ -61,9 +69,12 @@ export default function CommentSection({
                 id: uuid()
             }
 
-            if (comments?.length > 0) setComments(x => ([...x, newComment]))
-            else setComments(x => [newComment])
-            commentService.add(movieId, newComment);
+            commentService.add(movieId, newComment)
+                .then(x => {
+                    if (comments?.length > 0) setComments(x => ([...x, newComment]))
+                    else setComments(x => [newComment])
+                })
+                .catch(x => showAlert('Something went wrong!', alertType.error))
         } else {
             showAlert('You have to be logged in to leave a comment!', alertType.error)
         }

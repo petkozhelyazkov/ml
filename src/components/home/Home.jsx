@@ -9,9 +9,11 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import Spinner from "../Spinner";
 import ScrollToTop from "../ScrollToTop";
 import getMediaType from "../../utils/getMediaType";
+import { AlertContext, alertType } from "../../contexts/AlertContext";
 
 export default function Home() {
     const [mediaTypeDisplay, setMediaTypeDisplay] = useState()
+    const { showAlert } = useContext(AlertContext)
     const [movies, setMovies] = useState([]);
     const [showModal, setShowModal] = useState();
     const [loading, setLoading] = useState(true);
@@ -39,16 +41,19 @@ export default function Home() {
                 .then(x => {
                     setMovies(y => y.concat(x.results.filter(x => x.overview && x.vote_average && x.poster_path)))
                     setLoading(false);
-                    console.log(x);
                 })
-                .catch(x => console.log(x))
+                .catch(x => {
+                    showAlert('Something went wrong!', alertType.error)
+                })
         } else if (location.pathname.includes('genre')) {
             tmdb.getByGenre(genre, mediaType, page)
                 .then(x => {
                     setMovies(y => y.concat(x.results.filter(x => x.overview && x.vote_average && x.poster_path)))
                     setLoading(false)
                 })
-                .catch(x => console.log(x))
+                .catch(x => {
+                    showAlert('Something went wrong!', alertType.error)
+                })
         }
         else {
 
@@ -57,7 +62,9 @@ export default function Home() {
                     setMovies(y => y.concat(x.results.filter(x => x.overview && x.vote_average && x.poster_path)))
                     setLoading(false)
                 })
-                .catch(x => console.log(x))
+                .catch(x => {
+                    showAlert('Something went wrong!', alertType.error)
+                })
         }
     }, [location, query, page])
 

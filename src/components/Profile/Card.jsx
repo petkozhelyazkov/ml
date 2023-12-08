@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 import { removeLike, removeFavorite } from '../../apis/firebase/userService'
 import { TERipple } from 'tw-elements-react'
-import { useState } from 'react'
 
 export default function Card({
     movie,
@@ -12,14 +11,19 @@ export default function Card({
     function onRemove() {
         if (type == 'like') {
             removeLike(user.uid, movie.id)
+                .then(x => {
+                    let newLiked = user.liked.filter(x => x.id != movie.id)
+                    updateUser({ liked: newLiked })
+                })
+                .catch(x => showAlert('Something went wrong!', alertType.error))
 
-            let newLiked = user.liked.filter(x => x.id != movie.id)
-            updateUser({ liked: newLiked })
         } else if (type == 'favorite') {
             removeFavorite(user.uid, movie.id)
-
-            let newFavorite = user?.favorite?.filter(x => x.id != movie.id)
-            updateUser({ favorite: newFavorite })
+                .then(x => {
+                    let newFavorite = user?.favorite?.filter(x => x.id != movie.id)
+                    updateUser({ favorite: newFavorite })
+                })
+                .catch(x => showAlert('Something went wrong!', alertType.error))
         }
     }
 

@@ -15,8 +15,15 @@ export default function Profile() {
         let { imgUrl, displayName } = Object.fromEntries(new FormData(e.target).entries());
 
         updateUserComments(user.uid, { imgUrl, displayName })
-        userService.updateProfile(user.uid, { imgUrl, displayName })
-        updateUser({ imgUrl, displayName })
+            .then(x => {
+                userService.updateProfile(user.uid, { imgUrl, displayName })
+                    .then(x => {
+                        updateUser({ imgUrl, displayName })
+                    })
+                    .catch(x => showAlert('Something went wrong!', alertType.error))
+            })
+            .catch(x => showAlert('Something went wrong!', alertType.error))
+
 
     }
 

@@ -13,15 +13,16 @@ export default function MovieList({
     const { user, updateUser } = useContext(AuthContext)
 
     useEffect(() => {
-        Promise.all(data?.map(x => getById(x.id, x.mediaType))).then(y => {
-            y.forEach(z => {
-                z.mediaType = data.find(x => x.id == z.id).mediaType
-            })
+        Promise.all(data?.map(x => getById(x.id, x.mediaType)))
+            .then(y => {
+                y.forEach(z => {
+                    z.mediaType = data.find(x => x.id == z.id).mediaType
+                })
 
-            setMovies(y)
-            setLoading(false)
-            console.log(y);
-        })
+                setMovies(y)
+                setLoading(false)
+            })
+            .catch(x => showAlert('Something went wrong!', alertType.error))
     }, [data])
 
     return (

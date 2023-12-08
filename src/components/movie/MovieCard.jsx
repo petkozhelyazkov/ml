@@ -15,7 +15,6 @@ export default function MovieCard({
 
     function updateMovieModal() {
         updateMovie({ ...movie, mediaType })
-        console.log(mediaType);
     }
 
     return (

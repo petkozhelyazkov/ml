@@ -6,13 +6,11 @@ export default function Logout() {
     const navigate = useNavigate()
 
     useEffect(() => {
-        logOut().then(x => {
-            navigate('/')
-        })
+        logOut()
+            .then(x => {
+                navigate('/movies/trending')
+            })
     }, [])
 
-    return (
-        <div>
-        </div>
-    )
+    return (<div></div>)
 }
