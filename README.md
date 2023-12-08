@@ -3,7 +3,7 @@
 ReactJS project for SoftUni.
 
 ### Live Demo
-[https://symphonious-yeot-dc08db.netlify.app/movies/trending](https://symphonious-yeot-dc08db.netlify.app/movies/trending)
+[https://symphonious-yeot-dc08db.netlify.app](https://symphonious-yeot-dc08db.netlify.app)
 
 
 ### Tech Stack
