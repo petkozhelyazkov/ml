@@ -32,6 +32,8 @@ export default function CommentSection({
             .then(x => {
                 let newComments = comments.filter(x => x.id != comment.id)
                 setComments(newComments);
+
+                showAlert('Comment removed.', alertType.success)
             })
             .catch(x => showAlert('Something went wrong!', alertType.error))
     }
@@ -50,6 +52,8 @@ export default function CommentSection({
                     temp.comment = comment
                     setEditComment({})
                     teRef.current.value = ''
+
+                    showAlert('Comment edited.', alertType.success)
                 })
                 .catch(x => showAlert('Something went wrong!', alertType.error))
 
@@ -73,6 +77,8 @@ export default function CommentSection({
                 .then(x => {
                     if (comments?.length > 0) setComments(x => ([...x, newComment]))
                     else setComments(x => [newComment])
+
+                    showAlert('Comment added.', alertType.success)
                 })
                 .catch(x => showAlert('Something went wrong!', alertType.error))
         } else {

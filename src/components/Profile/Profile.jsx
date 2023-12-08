@@ -5,10 +5,11 @@ import * as userService from '../../apis/firebase/userService'
 import { updateUserComments } from "../../apis/firebase/commentService";
 import Saved from "./Saved";
 import { TERipple } from "tw-elements-react";
+import { AlertContext, alertType } from "../../contexts/AlertContext";
 
 export default function Profile() {
     const { user, updateUser } = useContext(AuthContext)
-
+    const { showAlert } = useContext(AlertContext)
 
     function onSubmit(e) {
         e.preventDefault();
@@ -19,6 +20,7 @@ export default function Profile() {
                 userService.updateProfile(user.uid, { imgUrl, displayName })
                     .then(x => {
                         updateUser({ imgUrl, displayName })
+                        showAlert('Profile updated.', alertType.success)
                     })
                     .catch(x => showAlert('Something went wrong!', alertType.error))
             })

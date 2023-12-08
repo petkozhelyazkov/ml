@@ -23,7 +23,7 @@ export default function MovieDetails() {
     const [imgLoading, setImgLoading] = useState(true)
     const [isLiked, setIsLiked] = useState(false)
     const [isFavorite, setIsFavorite] = useState(false)
-    const [cast, setCast] = useState();
+    const [cast, setCast] = useState([]);
     const [mediaType, setMediaType] = useState();
 
     useEffect(() => {
@@ -48,18 +48,18 @@ export default function MovieDetails() {
             .then(x => {
                 setMovie(x)
             })
-            .catch(x => showAlert('Something went wrong!', alertType.error))
+            .catch(x => showAlert('Something went wrong when trying to get movie details!', alertType.error))
 
         getCredits(id, tempMediaType)
             .then(x => {
                 setCast(x.cast)
             })
-            .catch(x => showAlert('Something went wrong!', alertType.error))
+            .catch(x => showAlert('Something went wrong when trying to get cast!', alertType.error))
     }, [])
 
     function onLike() {
         if (!user) {
-            showAlert('Tou have to be logged in to like!', alertType.error)
+            showAlert(`Tou have to be logged in to add ${movie?.title || movie?.name} to liked!`, alertType.error)
             return
         }
 
@@ -68,8 +68,9 @@ export default function MovieDetails() {
             like(user.uid, temp)
                 .then(x => {
                     updateUser(user.liked ? { liked: [...user.liked, temp] } : { liked: [temp] })
+                    showAlert(`Added ${movie?.title || movie?.name} to liked.`, alertType.success)
                 })
-                .catch(x => showAlert('Something went wrong!', alertType.error))
+                .catch(x => showAlert(`Something went wrong when adding ${movie?.title || movie?.name} to liked!`, alertType.error))
 
         } else {
             removeLike(user.uid, movie.id)
@@ -77,14 +78,16 @@ export default function MovieDetails() {
                     let newLiked = user.liked.filter(x => x.id != movie.id)
                     updateUser({ liked: newLiked })
                     setIsLiked(false)
+                    showAlert(`Removed ${movie?.title || movie?.name} from liked.`, alertType.success)
                 })
-                .catch(x => showAlert('Something went wrong!', alertType.error))
+                .catch(x => showAlert(`Something went wrong when removing ${movie?.title || movie?.name} from liked!`, alertType.error))
+
         }
     }
 
     function onFavorite() {
         if (!user) {
-            showAlert('Tou have to be logged in to favorite!', alertType.error)
+            showAlert(`Tou have to be logged in to add ${movie?.title || movie?.name} to favorite!`, alertType.error)
             return
         }
 
@@ -93,8 +96,9 @@ export default function MovieDetails() {
             favorite(user.uid, temp)
                 .then(x => {
                     updateUser(user.favorite ? { favorite: [...user.favorite, temp] } : { favorite: [temp] })
+                    showAlert(`Added ${movie?.title || movie?.name} to favorite.`, alertType.success)
                 })
-                .catch(x => showAlert('Something went wrong!', alertType.error))
+                .catch(x => showAlert(`Something went wrong when trying to add ${movie?.title || movie?.name} to favorite!`, alertType.error))
 
         } else {
             removeFavorite(user.uid, movie.id)
@@ -102,8 +106,9 @@ export default function MovieDetails() {
                     let newFavorite = user.favorite.filter(x => x.id != movie.id)
                     updateUser({ favorite: newFavorite })
                     setIsFavorite(false)
+                    showAlert(`Removed ${movie?.title || movie?.name} from favorite.`, alertType.success)
                 })
-                .catch(x => showAlert('Something went wrong!', alertType.error))
+                .catch(x => showAlert(`Something went wrong when removing ${movie?.title || movie?.name} from favorite!`, alertType.error))
         }
     }
 
