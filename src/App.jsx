@@ -7,6 +7,7 @@ import { AlertProvider } from "./contexts/AlertContext"
 import { useAuth } from "./hooks/useAuth"
 import { movieGenres, tvGenres } from "./utils/genres"
 import Spinner from "./components/Spinner"
+import AuthGuard from "./components/Auth/AuthGuard"
 
 const Navigation = lazy(() => import('./components/nav/Navigation'))
 const Home = lazy(() => import('./components/home/Home'))
@@ -57,8 +58,8 @@ export default function App() {
                                             <Route path="favorite" element={<Profile />} />
                                         </Route>
 
-                                        <Route path="/register" element={!user ? <Register /> : <Navigate to='/movies/trending' />} />
-                                        <Route path="/login" element={!user ? <Login /> : <Navigate to='/movies/trending' />} />
+                                        <Route path="/register" element={!user ? <Register /> : <AuthGuard />} />
+                                        <Route path="/login" element={!user ? <Login /> : <AuthGuard />} />
                                         <Route path="/logout" element={<Logout />} />
 
                                         <Route path="*" element={<ErrorPage />} />

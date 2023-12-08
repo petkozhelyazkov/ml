@@ -1,5 +1,5 @@
 import './MovieDetails.css'
-import { useContext, useEffect, useState } from "react";
+import { lazy, useContext, useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import { AlertContext, alertType } from "../../contexts/AlertContext";
