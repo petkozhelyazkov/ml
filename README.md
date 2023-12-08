@@ -1,8 +1,40 @@
-# React + Vite
+# movie-list-react-app 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+ReactJS project for SoftUni.
 
-Currently, two official plugins are available:
+### Live Demo
+[https://symphonious-yeot-dc08db.netlify.app/movies/trending](https://symphonious-yeot-dc08db.netlify.app/movies/trending)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+### Tech Stack
+
+- ReactJS
+- React Router
+- Tailwind
+- Tailwind-elements
+- Firebase - authentication and database
+- TMDB API
+
+### Public (guests)
+
+- Search movies: users and guests can search for movies by title
+- Genre-wise display: movies can be sorted by genre
+- Trending Movies: displays a section for trending movies
+- Upcoming movies: displays a section for upcoming movies
+- Movie Details: users and guests can view detailed information about each movie
+- Email Authentication: guest can sign in using their email
+
+
+### Private (users)
+
+- Details: logged in users can add movies or tv shows to liked/favorite and leave comments
+- Bookmark Movies: users can like and favorite their favorite movies for later viewing
+- Profile: users can see and change their profile inforamtion and see the movies and tv shows they've liked/favorited
+
+### Useful tools
+
+- [react-infinite-scroll-component](https://www.npmjs.com/package/react-infinite-scroll-component)
+
+
+### Author
+Petko Zhelyazkov
