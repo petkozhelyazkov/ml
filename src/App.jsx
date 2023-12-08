@@ -53,13 +53,12 @@ export default function App() {
                                         <Route path="/movie/:id" element={<MovieDetails />} />
                                         <Route path="/show/:id" element={<MovieDetails />} />
 
-                                        <Route path="/profile" element={user ? <Profile /> : <Login />} >
-                                            <Route path="liked" element={<Profile />} />
-                                            <Route path="favorite" element={<Profile />} />
-                                        </Route>
+                                        <Route path="/profile" element={user ? <Profile /> : <AuthGuard path='profile' />} />
+                                        <Route path="/profile/liked" element={user ? <Profile /> : <AuthGuard path='liked' />} />
+                                        <Route path="/profile/favorite" element={user ? <Profile /> : <AuthGuard path='favorite' />} />
 
-                                        <Route path="/register" element={!user ? <Register /> : <AuthGuard />} />
-                                        <Route path="/login" element={!user ? <Login /> : <AuthGuard />} />
+                                        <Route path="/register" element={!user ? <Register /> : <AuthGuard isAuth />} />
+                                        <Route path="/login" element={!user ? <Login /> : <AuthGuard isAuth />} />
                                         <Route path="/logout" element={<Logout />} />
 
                                         <Route path="*" element={<ErrorPage />} />

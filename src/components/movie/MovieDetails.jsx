@@ -49,6 +49,7 @@ export default function MovieDetails() {
                 setMovie(x)
             })
             .catch(x => showAlert('Something went wrong!', alertType.error))
+
         getCredits(id, tempMediaType)
             .then(x => {
                 setCast(x.cast)
