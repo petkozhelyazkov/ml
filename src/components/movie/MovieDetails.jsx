@@ -1,28 +1,30 @@
+import './MovieDetails.css'
 import { useContext, useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
-import { getById, getCredits } from "../../apis/tmdb/tmdb";
-import './MovieDetails.css'
-import MovieModal from "./MovieModal";
-import Cast from "./Cast";
-import Chip from "../search/Chip";
-import CommentSection from "./CommentSection";
 import { AuthContext } from "../../contexts/AuthContext";
+import { AlertContext, alertType } from "../../contexts/AlertContext";
+import { getById, getCredits } from "../../apis/tmdb/tmdb";
 import { favorite, like, removeFavorite, removeLike } from "../../apis/firebase/userService";
 import getMediaType from "../../utils/getMediaType";
-import { AlertContext, alertType } from "../../contexts/AlertContext";
-import Spinner from "../Spinner";
+
+const CommentSection = lazy(() => import('./CommentSection'))
+const MovieModal = lazy(() => import('./MovieModal'))
+const Cast = lazy(() => import('./Cast'))
+const Chip = lazy(() => import('../search/Chip'))
+const Spinner = lazy(() => import('../Spinner'))
+
 
 export default function MovieDetails() {
-    const location = useLocation();
     const { id } = useParams();
+    const { showAlert } = useContext(AlertContext)
+    const { user, updateUser } = useContext(AuthContext)
+    const location = useLocation();
     const [movie, setMovie] = useState();
     const [imgLoading, setImgLoading] = useState(true)
     const [isLiked, setIsLiked] = useState(false)
-    const { showAlert } = useContext(AlertContext)
     const [isFavorite, setIsFavorite] = useState(false)
     const [cast, setCast] = useState();
     const [mediaType, setMediaType] = useState();
-    const { user, updateUser } = useContext(AuthContext)
 
     useEffect(() => {
         if (user) {

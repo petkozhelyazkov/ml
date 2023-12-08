@@ -1,19 +1,20 @@
 import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../contexts/AuthContext";
+import { useLocation } from "react-router-dom";
+import MovieList from "./MovieList";
+import ScrollToTop from "../ScrollToTop";
+
 import {
     TETabs,
     TETabsContent,
     TETabsItem,
     TETabsPane,
 } from "tw-elements-react";
-import { AuthContext } from "../../contexts/AuthContext";
-import { useLocation } from "react-router-dom";
-import ScrollToTop from "../ScrollToTop";
-import MovieList from "./MovieList";
 
 export default function Saved() {
-    const [justifyActive, setJustifyActive] = useState();
-    const location = useLocation();
     const { user } = useContext(AuthContext)
+    const location = useLocation();
+    const [justifyActive, setJustifyActive] = useState();
 
     useEffect(() => {
         let path = location.pathname
@@ -27,7 +28,6 @@ export default function Saved() {
         }
         setJustifyActive(value);
     };
-
 
     return (
         <div className="mb-3 h-full w-2/3 flex flex-col items-center bg-gray-800">

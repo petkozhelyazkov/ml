@@ -1,16 +1,17 @@
 import { useContext, useEffect, useState } from "react"
-import { getById } from "../../apis/tmdb/tmdb"
-import Card from "./Card"
 import { AuthContext } from "../../contexts/AuthContext"
-import Spinner from "../Spinner"
+import { getById } from "../../apis/tmdb/tmdb"
+
+const Card = lazy(() => import('./Card'))
+const Spinner = lazy(() => import('../Spinner'))
 
 export default function MovieList({
     data,
     type
 }) {
-    const [loading, setLoading] = useState(true)
-    const [movies, setMovies] = useState([])
     const { user, updateUser } = useContext(AuthContext)
+    const [movies, setMovies] = useState([])
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         Promise.all(data?.map(x => getById(x.id, x.mediaType)))

@@ -6,8 +6,6 @@ import {
     doc,
     arrayUnion,
     updateDoc,
-    query,
-    where,
     collection,
     getDocs
 } from "firebase/firestore";
@@ -56,7 +54,6 @@ export function edit(id, comment) {
     return get(id).then(x => {
         let temp = x.comments.find(x => x.id == comment.id)
         temp.comment = comment.comment
-
         setDoc(commentsDocRef, {
             comments: x.comments
         });
@@ -68,7 +65,6 @@ export function remove(id, comment) {
 
     return get(id).then(x => {
         let newComments = x.comments.filter(x => x.id != comment.id)
-
         setDoc(commentsDocRef, {
             comments: newComments
         });

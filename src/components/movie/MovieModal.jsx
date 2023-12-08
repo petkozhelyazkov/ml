@@ -1,12 +1,9 @@
-import { useContext, useEffect } from "react"
+import './MovieModal.css'
+import { useContext } from "react"
 import { ModalContext } from "../../contexts/ModalContext";
 import { Link } from "react-router-dom";
-import './MovieModal.css'
 
-import {
-    TEModal,
-    TEModalDialog
-} from "tw-elements-react";
+import { TEModal, TEModalDialog } from "tw-elements-react";
 
 export default function MovieModal({
     showModal,

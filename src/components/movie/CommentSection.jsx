@@ -1,18 +1,18 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import Comment from "./Comment";
-import * as commentService from "../../apis/firebase/commentService";
 import { AuthContext } from "../../contexts/AuthContext";
 import { AlertContext, alertType } from "../../contexts/AlertContext";
+import Comment from "./Comment";
+import * as commentService from "../../apis/firebase/commentService";
 import uuid from "react-uuid";
 
 export default function CommentSection({
     movieId
 }) {
-    const [comments, setComments] = useState([])
-    const [editComment, setEditComment] = useState()
-    const teRef = useRef()
     const { user } = useContext(AuthContext)
     const { showAlert } = useContext(AlertContext)
+    const teRef = useRef()
+    const [comments, setComments] = useState([])
+    const [editComment, setEditComment] = useState()
 
     useEffect(() => {
         commentService.get(movieId)

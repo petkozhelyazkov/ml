@@ -1,9 +1,10 @@
 import { useNavigate } from 'react-router-dom'
-import FormInput from "./FormInput";
 import { signUp } from "../../apis/firebase/authService";
-import AuthForm from "./AuthForm";
 import { useContext } from "react";
 import { AlertContext, alertType } from "../../contexts/AlertContext";
+
+const FormInput = lazy(() => import('./FormInput'))
+const AuthForm = lazy(() => import('./AuthForm'))
 
 export default function Register() {
     const navigate = useNavigate();

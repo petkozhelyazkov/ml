@@ -1,15 +1,16 @@
-import { useContext, useEffect, useState } from "react"
-import * as tmdb from "../../apis/tmdb/tmdb";
-import MovieCard from "../movie/MovieCard";
+import { lazy, useContext, useEffect, useState } from "react"
 import { SearchContext } from "../../contexts/SearchContext";
-import Search from "../search/Search";
-import { useLocation } from "react-router-dom";
-import MovieModal from "../movie/MovieModal";
-import InfiniteScroll from "react-infinite-scroll-component";
-import Spinner from "../Spinner";
-import ScrollToTop from "../ScrollToTop";
-import getMediaType from "../../utils/getMediaType";
 import { AlertContext, alertType } from "../../contexts/AlertContext";
+import { useLocation } from "react-router-dom";
+import * as tmdb from "../../apis/tmdb/tmdb";
+import getMediaType from "../../utils/getMediaType";
+
+const MovieCard = lazy(() => import('../movie/MovieCard'))
+const Search = lazy(() => import('../search/Search'))
+const MovieModal = lazy(() => import('../movie/MovieModal'))
+const InfiniteScroll = lazy(() => import('react-infinite-scroll-component'))
+const Spinner = lazy(() => import('../Spinner'))
+const ScrollToTop = lazy(() => import('../ScrollToTop'))
 
 export default function Home() {
     const [mediaTypeDisplay, setMediaTypeDisplay] = useState()

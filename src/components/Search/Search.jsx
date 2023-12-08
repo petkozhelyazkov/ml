@@ -1,8 +1,8 @@
 import './Search.css'
-import Chip from './Chip'
 import { useContext, useEffect, useState } from 'react'
 import { SearchContext } from '../../contexts/SearchContext'
 import { movieGenres, tvGenres } from '../../utils/genres'
+import Chip from './Chip'
 
 export default function Search() {
     const { updateQuery, updateGenre, mediaType } = useContext(SearchContext)

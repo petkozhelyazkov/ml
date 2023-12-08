@@ -33,8 +33,6 @@ export default function Comment({
                                     src={comment?.user.imgUrl} />
                                 : <svg className="w-9 h-9 rounded-full text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd"></path></svg>
                             }
-
-
                             {comment?.user.displayName ? comment?.user.displayName : comment?.user.email}
                         </p>
                         <p className="text-sm text-gray-600 dark:text-gray-400"><time pubdate='true' dateTime="2022-02-08"
@@ -53,14 +51,10 @@ export default function Comment({
                             </TERipple>
                             <TEDropdownMenu className="py-1 text-sm text-gray-700 dark:text-gray-200">
                                 <TEDropdownItem>
-                                    <a href="#commentSection" onClick={onEdit} className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white0">
-                                        Edit
-                                    </a>
+                                    <a href="#commentSection" onClick={onEdit} className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white0">Edit</a>
                                 </TEDropdownItem>
                                 <TEDropdownItem>
-                                    <a href="" onClick={onRemove} className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                        Remove
-                                    </a>
+                                    <a href="" onClick={onRemove} className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Remove</a>
                                 </TEDropdownItem>
                             </TEDropdownMenu>
                         </TEDropdown>

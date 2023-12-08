@@ -1,16 +1,18 @@
-import { useContext, useState } from "react"
 import './Navigation.css'
-import NavigationItem from "./NavigationItem"
-import Separator from "./Separator"
-import NavigationUser from "./NavigationUser"
+import { useContext, useState } from "react"
 import { SearchContext } from "../../contexts/SearchContext"
 import { AuthContext } from "../../contexts/AuthContext"
 import { movieNav, showNav, userNav } from "../../utils/navPaths"
 
+const NavigationItem = lazy(() => import('./NavigationItem'))
+const Separator = lazy(() => import('./Separator'))
+const NavigationUser = lazy(() => import('./NavigationUser'))
+
+
 export default function Navigation() {
-    const [open, setOpen] = useState(false)
-    const { updateMediaType } = useContext(SearchContext);
     const { user } = useContext(AuthContext)
+    const { updateMediaType } = useContext(SearchContext);
+    const [open, setOpen] = useState(false)
 
     function onClick(type) {
         updateMediaType(type)

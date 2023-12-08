@@ -1,10 +1,8 @@
-import { useContext, useEffect } from "react"
-
-import {
-    TERipple
-} from "tw-elements-react";
-
+import { useContext } from "react"
 import { ModalContext } from "../../contexts/ModalContext";
+
+import { TERipple } from "tw-elements-react";
+
 
 export default function MovieCard({
     movie,

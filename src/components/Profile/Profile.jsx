@@ -1,10 +1,10 @@
 import { useContext } from "react";
-import { TERipple } from "tw-elements-react";
 import { AuthContext } from "../../contexts/AuthContext";
-import * as userService from '../../apis/firebase/userService'
-import Saved from "./Saved";
 import { Link } from "react-router-dom";
+import * as userService from '../../apis/firebase/userService'
 import { updateUserComments } from "../../apis/firebase/commentService";
+import Saved from "./Saved";
+import { TERipple } from "tw-elements-react";
 
 export default function Profile() {
     const { user, updateUser } = useContext(AuthContext)
@@ -23,8 +23,6 @@ export default function Profile() {
                     .catch(x => showAlert('Something went wrong!', alertType.error))
             })
             .catch(x => showAlert('Something went wrong!', alertType.error))
-
-
     }
 
     return (

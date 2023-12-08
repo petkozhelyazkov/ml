@@ -26,7 +26,12 @@ export function SearchProvider({ children }) {
 
     return (
         <SearchContext.Provider
-            value={{ query, updateQuery, genre, updateGenre, mediaType, updateMediaType, page, updatePage }}>
+            value={{
+                query, updateQuery,
+                genre, updateGenre,
+                mediaType, updateMediaType,
+                page, updatePage
+            }}>
             {children}
         </SearchContext.Provider>
     )
