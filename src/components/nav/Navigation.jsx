@@ -1,24 +1,11 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext, useState } from "react"
 import './Navigation.css'
 import NavigationItem from "./NavigationItem"
 import Separator from "./Separator"
 import NavigationUser from "./NavigationUser"
 import { SearchContext } from "../../contexts/SearchContext"
 import { AuthContext } from "../../contexts/AuthContext"
-
-const movieNav = [
-    { label: 'Trending', path: '/movies/trending', img: '/trending.png' },
-    { label: 'Upcoming', path: '/movies/upcoming', img: '/upcoming.png' },
-    { label: 'Top rated', path: '/movies/top-rated', img: '/top.png' }
-]
-const showNav = [
-    { label: 'Trending', path: '/shows/trending', img: '/trending.png' },
-    { label: 'Top rated', path: '/shows/top-rated', img: '/top.png' }
-]
-const userNav = [
-    { label: 'Liked', path: '/profile/liked', img: '/liked.png' },
-    { label: 'Favorite', path: '/profile/favorite', img: '/favorite.png' },
-]
+import { movieNav, showNav, userNav } from "../../utils/navPaths"
 
 export default function Navigation() {
     const [open, setOpen] = useState(false)
@@ -26,31 +13,27 @@ export default function Navigation() {
     const { user } = useContext(AuthContext)
 
     function onClick(type) {
-        updateMediaType(type.slice(type.indexOf('/') + 1, type.lastIndexOf('/')))
+        updateMediaType(type)
     }
-
-    // useEffect(() => {
-    //     console.log(user);
-    // }, [open])
 
     return (
         <nav>
             <div className="space-x-6 z-20 fixed h-screen bg-gray-900">
                 {open ?
                     <div onMouseLeave={() => setOpen(false)} className="open flex flex-col items-center w-40 h-full overflow-hidden text-gray-400 bg-gray-900" >
-                        <NavigationItem to='/'>
+                        <NavigationItem to='/movies/trending'>
                             <img className="mx-auto w-16" src="/movies.png" />
                         </NavigationItem>
                         <Separator label='Movies'>
                             {movieNav.map((x, i) =>
-                                <NavigationItem onClick={() => { onClick(x.path) }} key={i} label={x.label} to={x.path}>
+                                <NavigationItem onClick={() => { onClick('movies') }} key={i} label={x.label} to={x.path}>
                                     <img className="svg w-6 h-6 stroke-current" src={x.img} />
                                 </NavigationItem>
                             )}
                         </Separator>
                         <Separator label='TV shows'>
                             {showNav.map((x, i) =>
-                                <NavigationItem onClick={() => { onClick(x.path) }} key={i} label={x.label} to={x.path}>
+                                <NavigationItem onClick={() => { onClick('shows') }} key={i} label={x.label} to={x.path}>
                                     <img className="svg w-6 h-6 stroke-current" src={x.img} />
                                 </NavigationItem>
                             )}

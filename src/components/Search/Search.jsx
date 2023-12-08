@@ -2,36 +2,10 @@ import './Search.css'
 import Chip from './Chip'
 import { useContext, useEffect, useState } from 'react'
 import { SearchContext } from '../../contexts/SearchContext'
+import { movieGenres, tvGenres } from '../../utils/genres'
 
-const movieGenres = [
-    { "id": 28, "genre": "Action" },
-    { "id": 12, "genre": "Adventure" },
-    { "id": 35, "genre": "Comedy" },
-    { "id": 80, "genre": "Crime" },
-    { "id": 99, "genre": "Documentary" },
-    { "id": 18, "genre": "Drama" },
-    { "id": 14, "genre": "Fantasy" },
-    { "id": 36, "genre": "History" },
-    { "id": 27, "genre": "Horror" },
-    { "id": 9648, "genre": "Mystery" },
-    { "id": 10749, "genre": "Romance" },
-    { "id": 878, "genre": "Science Fiction" },
-    { "id": 53, "genre": "Thriller" },
-    { "id": 10752, "genre": "War" },
-]
-
-const tvGenres = [
-    { "id": 35, "genre": "Comedy" },
-    { "id": 80, "genre": "Crime" },
-    { "id": 99, "genre": "Documentary" },
-    { "id": 18, "genre": "Drama" },
-    { "id": 36, "genre": "History" },
-    { "id": 9648, "genre": "Mystery" },
-    { "id": 10749, "genre": "Romance" },
-]
-
-export default function Search({ mediaType }) {
-    const { updateQuery, updateGenre } = useContext(SearchContext)
+export default function Search() {
+    const { updateQuery, updateGenre, mediaType } = useContext(SearchContext)
     const [query, setQuery] = useState('')
 
     useEffect(() => {
@@ -66,11 +40,10 @@ export default function Search({ mediaType }) {
             </div>
             <div className='w-1/2 flex flex-wrap justify-center px-2'>
                 {
-                    mediaType == 'movies'
+                    mediaType == 'Movies'
                         ? movieGenres.map(x => <Chip updateGenre={updateGenre} key={x.id} {...x} />)
                         : tvGenres.map(x => <Chip updateGenre={updateGenre} key={x.id} {...x} />)
                 }
-                <Chip updateGenre={() => { updateGenre('') }} genre='Remove' />
             </div>
 
         </div>

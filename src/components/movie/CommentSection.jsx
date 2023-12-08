@@ -2,7 +2,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import Comment from "./Comment";
 import * as commentService from "../../apis/firebase/commentService";
 import { AuthContext } from "../../contexts/AuthContext";
-import { AlertContext } from "../../contexts/AlertContext";
+import { AlertContext, alertType } from "../../contexts/AlertContext";
 import uuid from "react-uuid";
 
 export default function CommentSection({
@@ -17,7 +17,7 @@ export default function CommentSection({
     useEffect(() => {
         commentService.get(movieId)
             .then(x => {
-                setComments(x.comments)
+                setComments(x?.comments || [])
             })
     }, [])
 
@@ -65,7 +65,7 @@ export default function CommentSection({
             else setComments(x => [newComment])
             commentService.add(movieId, newComment);
         } else {
-            showAlert('You have to be logged in to leave a comment!', 'error')
+            showAlert('You have to be logged in to leave a comment!', alertType.error)
         }
 
         teRef.current.value = ''
@@ -73,7 +73,7 @@ export default function CommentSection({
 
     return (
         <>
-            <section id='commentSection' className="bg-white w-2/3 dark:bg-gray-900 py-8 lg:py-16 antialiased">
+            <section id='commentSection' className="bg-white w-2/3 rounded-xl dark:bg-gray-900 py-8 lg:py-16 antialiased">
                 <div className="max-w-2xl mx-auto px-4">
                     <div className="flex justify-between items-center mb-6">
                         <h2 className="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">Discussion ({comments?.length})</h2>
@@ -90,7 +90,9 @@ export default function CommentSection({
                             Post comment
                         </button>
                     </form>
-                    {comments?.map(x => <Comment key={x.id} removeComment={onRemove} editComment={onEdit} movieId={movieId} comment={x} currentUser={user} />)}
+                    {comments.length == 0
+                        ? <span className="text-gray-500 text-xl inline-block w-full text-center">No comments yet!</span>
+                        : comments?.map(x => <Comment key={x.id} removeComment={onRemove} editComment={onEdit} movieId={movieId} comment={x} currentUser={user} />)}
                 </div>
             </section>
         </>

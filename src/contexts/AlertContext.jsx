@@ -2,6 +2,11 @@ import { createContext, useState, useCallback } from 'react';
 
 export const AlertContext = createContext();
 
+export const alertType = {
+    success: 'success',
+    error: 'error'
+}
+
 export const AlertProvider = ({ children }) => {
     const [alert, setAlert] = useState({ visible: false, message: '', type: '' });
 

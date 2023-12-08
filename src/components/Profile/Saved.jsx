@@ -5,10 +5,10 @@ import {
     TETabsItem,
     TETabsPane,
 } from "tw-elements-react";
-import Liked from "./Liked";
-import Favorite from "./Favorite";
 import { AuthContext } from "../../contexts/AuthContext";
 import { useLocation } from "react-router-dom";
+import ScrollToTop from "../ScrollToTop";
+import MovieList from "./MovieList";
 
 export default function Saved() {
     const [justifyActive, setJustifyActive] = useState();
@@ -48,11 +48,12 @@ export default function Saved() {
 
             <TETabsContent>
                 <TETabsPane show={justifyActive === "liked"}>
-                    <Liked data={user?.liked || []} />
+                    <MovieList data={user.liked || []} type='like' />
                 </TETabsPane>
                 <TETabsPane show={justifyActive === "favorite"}>
-                    <Favorite data={user?.favorite || []} />
+                    <MovieList data={user.favorite || []} type='favorite' />
                 </TETabsPane>
+                <ScrollToTop />
             </TETabsContent>
         </div>
     )

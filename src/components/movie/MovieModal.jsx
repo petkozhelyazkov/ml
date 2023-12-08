@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 import { ModalContext } from "../../contexts/ModalContext";
 import { Link } from "react-router-dom";
 import './MovieModal.css'
@@ -10,7 +10,8 @@ import {
 
 export default function MovieModal({
     showModal,
-    setModal
+    setModal,
+    mediaType
 }) {
     const { movie } = useContext(ModalContext)
 

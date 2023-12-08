@@ -1,7 +1,9 @@
+import { Link, useLocation } from "react-router-dom"
 import { TERipple } from "tw-elements-react"
 
 export default function Chip({
     genre,
+    label,
     id,
     updateGenre
 }) {
@@ -10,9 +12,10 @@ export default function Chip({
     }
 
     return (
-        <div
-            onClick={onClick}
-            className="
+        <Link to={`genre/${genre}`}>
+            <div
+                onClick={onClick}
+                className="
             [word-wrap: break-word]
             my-[5px] mr-4 flex h-10
             cursor-pointer items-center
@@ -24,9 +27,12 @@ export default function Chip({
             duration-300 ease-linear hover:!shadow-none
             dark:bg-gray-900
             dark:text-neutral-200 active:bg-slate-800">
-            <TERipple color='white'>
-                <span> {genre}</span>
-            </TERipple>
-        </div>
+                <TERipple color='white'>
+                    <span >
+                        {label}
+                    </span>
+                </TERipple>
+            </div>
+        </Link>
     )
 }

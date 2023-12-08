@@ -1,9 +1,10 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { TERipple } from "tw-elements-react";
 import { AuthContext } from "../../contexts/AuthContext";
 import * as userService from '../../apis/firebase/userService'
 import Saved from "./Saved";
 import { Link } from "react-router-dom";
+import { updateUserComments } from "../../apis/firebase/commentService";
 
 export default function Profile() {
     const { user, updateUser } = useContext(AuthContext)
@@ -13,8 +14,10 @@ export default function Profile() {
         e.preventDefault();
         let { imgUrl, displayName } = Object.fromEntries(new FormData(e.target).entries());
 
+        updateUserComments(user.uid, { imgUrl, displayName })
         userService.updateProfile(user.uid, { imgUrl, displayName })
         updateUser({ imgUrl, displayName })
+
     }
 
     return (
@@ -26,7 +29,7 @@ export default function Profile() {
                         : <svg className="absolute w-32 h-32 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd"></path></svg>
                     }
                 </div>
-                <div className="fixed inset-x-[76.4%]">
+                <div className="absolute inset-x-[76.4%]">
                     <Link to='/logout' className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700">
                         Logout
                     </Link>

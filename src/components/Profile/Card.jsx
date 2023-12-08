@@ -50,12 +50,12 @@ export default function Card({
                                     {movie?.vote_average?.toFixed(1)}
                                 </span>
                             </div>
-                            {(movie.runtime || movie.episode_run_time[0]) &&
+                            {(movie?.runtime || movie?.episode_run_time[0]) &&
                                 <span className='text-gray-500 mt-1 font-light'>Duration: {movie?.runtime || movie?.episode_run_time[0]} min.</span>
                             }
                         </div>
                         <div className='flex gap-x-4'>
-                            <Link className='text-gray-500 hover:text-gray-400' to={`/movie/${movie.id}`}>{'Details >'} </Link>
+                            <Link className='text-gray-500 hover:text-gray-400' to={`/${movie.mediaType}/${movie.id}`}>{'Details >'} </Link>
                         </div>
                     </div>
                 </div>

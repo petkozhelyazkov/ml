@@ -3,7 +3,7 @@ import AuthForm from "./AuthForm"
 import { signIn } from "../../apis/firebase/authService";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
-import { AlertContext } from "../../contexts/AlertContext";
+import { AlertContext, alertType } from "../../contexts/AlertContext";
 
 export default function Login() {
     const navigate = useNavigate();
@@ -14,11 +14,11 @@ export default function Login() {
         let { email, password } = Object.fromEntries(new FormData(e.target));
         signIn(email, password)
             .then(x => {
-                showAlert('You logged in successfully!', 'success')
+                showAlert('You logged in successfully!', alertType.success)
                 navigate('/')
             })
             .catch(x => {
-                showAlert(x.message, 'error')
+                showAlert(x.message, alertType.error)
             })
     }
 

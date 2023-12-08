@@ -5,7 +5,11 @@ import {
     setDoc,
     doc,
     arrayUnion,
-    updateDoc
+    updateDoc,
+    query,
+    where,
+    collection,
+    getDocs
 } from "firebase/firestore";
 
 app();
@@ -23,6 +27,23 @@ export async function add(id, comment) {
             comments: [comment]
         })
     }
+}
+
+export async function updateUserComments(userId, changes) {
+    const commentRef = collection(db, 'comments');
+
+    const snap = await getDocs(commentRef);
+    snap.forEach((doc) => {
+        let newComments = doc.data().comments
+        newComments.forEach(x => {
+            if (x.user.id == userId) {
+                x.user = { ...x.user, ...changes }
+            }
+            setDoc(doc.ref, {
+                comments: newComments
+            })
+        });
+    });
 }
 
 export function get(id) {
