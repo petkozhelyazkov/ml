@@ -47,6 +47,7 @@ export default function MovieDetails() {
         getById(id, tempMediaType)
             .then(x => {
                 setMovie(x)
+                console.log(x);
             })
             .catch(x => showAlert('Something went wrong when trying to get movie details!', alertType.error))
 
@@ -161,7 +162,7 @@ export default function MovieDetails() {
                             <p>{movie?.overview}</p>
                         </div>
                         <div className="flex flex-row justify-evenly w-full mt-10 pt-8 mb-10">
-                            <div className="flex flex-col text-gray-300">
+                            <div className="flex flex-col w-1/3 text-gray-300">
                                 <span className="w-2/3 mb-2">Production: {
                                     movie?.production_companies
                                         ? movie?.production_companies?.map(({ name }) => name).join(', ')
@@ -175,6 +176,16 @@ export default function MovieDetails() {
                                             : movie?.first_air_date
                                     }
                                 </span>
+                            </div>
+                            <div className='w-1/3 text-center flex justify-center items-center text-gray-300'>
+                                {movie?.runtime
+                                    ?
+                                    <span>Duration: {movie?.runtime} min.</span>
+                                    : <div>
+                                        <p>Seasons: {movie?.number_of_seasons}</p>
+                                        <p>Episodes: {movie?.number_of_episodes}</p>
+                                    </div>
+                                }
                             </div>
                             <div className="font-black flex w-1/3 text-center flex-col">
                                 <span className="text-yellow-500 text-center text-xl">IMDB SCORE ({movie?.vote_count})</span>
